@@ -22,6 +22,15 @@ function createTestClient() {
             }
           }),
           order: (_col: string, _opts?: any) => ({ limit: async (_n: number) => ({ data: [], error: null }) })
+        }),
+        insert: (payload: any) => ({
+          select: () => ({
+            single: async () => {
+              // emulate insertion and return payload with id
+              const returned = Object.assign({ id: 'inserted-' + Math.random().toString(36).slice(2,8) }, payload);
+              return { data: returned, error: null };
+            }
+          })
         })
       };
     },
