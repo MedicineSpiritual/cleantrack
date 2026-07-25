@@ -27,14 +27,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     if (action === '2fa_generate') {
       const { userId } = req.body;
-      // TODO: generate TOTP secret and return provisioning URI for authenticator apps
-      return res.status(200).json({ ok: false, message: '2FA generation not implemented' });
+      if (!userId) return res.status(400).json({ ok: false, message: 'Missing userId' });
+      try {
+        const result = await import('../../modules/auth').then(m => m.generateTOTPSecretForUser(userId));
+        return res.status(200).json({ ok: true, message: 'TOTP generated', data: result });
+      } catch (err: any) {
+        console.error('2fa_generate error', err);
+        return res.status(500).json({ ok: false, message: '2FA generation failed' });
+      }
     }
 
     if (action === '2fa_verify') {
       const { userId, token } = req.body;
-      // TODO: verify TOTP token
-      return res.status(200).json({ ok: false, message: '2FA verification not implemented' });
+      if (!userId || !token) return res.status(400).json({ ok: false, message: 'Missing params' });
+      try {
+        const result = await import('../../modules/auth').then(m => m.verifyTOTPForUser(userId, token));
+        return res.status(200).json({ ok: true, message: '2FA verified', data: result });
+      } catch (err: any) {
+        console.error('2fa_verify error', err);
+        return res.status(500).json({ ok: false, message: '2FA verification failed' });
+      }
     }
 
     return res.status(400).json({ ok: false, message: 'Unknown action' });
