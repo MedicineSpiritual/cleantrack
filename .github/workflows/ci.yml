@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: |
+          echo "Skipping install in scaffold. Run npm install in CI when package.json is updated."
+      - name: Lint
+        run: |
+          echo "Run ESLint in CI when dependencies are installed"
+      - name: Run tests
+        run: |
+          echo "Run tests (jest) in CI when configured"

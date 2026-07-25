@@ -1,0 +1,11 @@
+{
+  "name": "cleantrack",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Start dev for web/mobile projects separately\"",
+    "lint": "echo \"Run ESLint (install dependencies first)\"",
+    "test": "jest --config jest.config.cjs --runInBand"
+  },
+  "license": "MIT"
+}

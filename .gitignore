@@ -1,0 +1,26 @@
+# Node / Next
+node_modules/
+.next/
+dist/
+.env
+.env.*
+.DS_Store
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# VSCode
+.vscode/
+
+# Flutter
+**/build/
+**/.dart_tool/
+**/.pub-cache/
+**/pubspec.lock
+android/.gradle/
+ios/Pods/
+
+# Misc
+.idea/
+*.iml
+*.log
