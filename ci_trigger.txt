@@ -1,0 +1,3 @@
+Trigger CI run
+
+File created to trigger GitHub Actions CI run. Timestamp: 2026-07-25T13:28:00+02:00
